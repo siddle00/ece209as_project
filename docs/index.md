@@ -1,12 +1,13 @@
 # Abstract
 
-Provide a brief overview of the project objhectives, approach, and results.
+Using Deep Learning models for Audio spoofing detection. The problem statement is a part of the Automatic Speaker Verification Spoofing and Countermeasures Challenge - https://www.asvspoof.org/ 
+
 
 # Team
 
-* Name of team member \#1 
-* Name of team member \#2 (delete this if necessary)
-* Name of team member \#3 (delete this if necessary)
+* Name of team member \#1 Nithin Varma  nithinvarma@ucla.edu  UID: 005851269 
+* Name of team member \#2 Sidarth Srinivasan sidarthsrini@ucla.edu UID: 005629203
+
 
 # Required Submissions
 
