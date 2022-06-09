@@ -15,10 +15,10 @@ Provide a brief overview of the project objhectives, approach, and results.
 
 This section should cover the following items:
 
-* Motivation 
+* Motivation  <br />
 We observe a surge in the count of smart devices that uses voice control as its interface to users over the past decade. And since voice control is used in numerous senstive applications such as Banking, Healthcare and Smart Homes, Automatic Speaker Verification systems are used as a form of biometric identification of the speaker. Over the past few years, there has been many attempts to spoof the ASV system by various attacks like Impersonation attacks, Replay Speech Synthesis, Voice Conversion. Hence a countermeasure system is needed to identify such attacks. The Countermeasure System will complement the ASV system in its identification process. The goal of the project is to develop a Countermeasure (CM) system to complement the ASV system to verify the authenticity (original/fake) of a given audio sample.
 
-* Objective
+* Objective  <br />
 Given an Automatic Speaker Verification (ASV) system whose role is verify if the input speech sample belongs to the target user or not, this system is however vulenerable to attacks such as the following nature:
 Physical Access Attacks: Replay attacks where in the attacker captures the voice of the target user using a recording device and plays the recording to the ASV system)
 Voice Conversion/Speech Synthesis attacks : Attacks where in an attacker utilizes TTS (text to speech) modules to generate speech to mimic the target user or use voice conversion techniques to convert the attacker’s voice to the target user’s voice).
