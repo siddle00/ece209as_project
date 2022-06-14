@@ -2,7 +2,6 @@
 
 ## 1. Motivation & Objective
 
-What are you trying to do and why? (plain English without jargon)
 
 ### **Motivation**
 
@@ -37,11 +36,10 @@ On a general front, Counter Measure systems can be employed in tandem to ASV sys
 
 ## 5. Challenges
 
-What are the challenges and risks?
+Developing a model that can match the performance of fusion models. Fusion models are usally a combination on multiple sub systems and hence they are computationally expensive. Hence the light weight model must match the performance of the fusion models would be a challenge.
 
 ## 6. Requirements for Success
 
-What skills and resources are necessary to perform the project?
 
 Based on the work done thus far, we understand that various filtering and pre-processing techniques such as MQCC, Mel Spectrum and CQCCs are required as these domain transformation techniques are widely used to convert the data from its acoustic waveform to its fourier domain. Hence speech processing/filtering domain knowledge is needed. 
 
@@ -50,7 +48,6 @@ The second leg of the architecture involves the use of Deep Learning models such
 
 ## 7. Metrics of Success
 
-What are metrics by which you would check for success?
 
 As the problem is defined by the ASV spoof competion organizers (https://www.asvspoof.org/), the metrics defined are as follows: 
 
@@ -60,6 +57,16 @@ As the problem is defined by the ASV spoof competion organizers (https://www.asv
 
 ## 8. Execution Plan
 
+We would compare the performance of different models based on the evaluation metrics specified below, 
+  - Equal Error Rate (EER): Decision threshold where the false acceptance and the false rejection rates are equal.
+  - Tandem Detection Cost Function (t-DCF): Takes into account both the ASV system error and CM system error into consideration.
+      ![This is tdcf ](https://github.com/siddle00/ece209as_project/blob/main/Images/tdcf.png)
+      
+      - Casv miss - Cost of ASV system rejecting a target trial.
+      - Casv fa - Cost of ASV system accepting a non-target trial.
+      - Ccm miss - Cost of CM system rejecting a bonafide trial. 
+      - Ccm fa - Cost of ASV system accepting a spoof trial.
+      - π - Priori probabilities, P• - Error rates
 
 ## 9. Related Work
 
