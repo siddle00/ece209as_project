@@ -16,20 +16,20 @@ Provide a brief overview of the project objhectives, approach, and results.
 This section should cover the following items:
 
 * Motivation  <br />
-We observe a surge in the count of smart devices that uses voice control as its interface to users over the past decade. And since voice control is used in numerous senstive applications such as Banking, Healthcare and Smart Homes, Automatic Speaker Verification systems are used as a form of biometric identification of the speaker. Over the past few years, there has been many attempts to spoof the ASV system by various attacks like Impersonation attacks, Replay Speech Synthesis, Voice Conversion. Hence a countermeasure system is needed to identify such attacks. The Countermeasure System will complement the ASV system in its identification process. The goal of the project is to develop a Countermeasure (CM) system to complement the ASV system to verify the authenticity (original/fake) of a given audio sample.
+  -We observe a surge in the count of smart devices that uses voice control as its interface to users over the past decade. And since voice control is used in numerous senstive applications such as Banking, Healthcare and Smart Homes, Automatic Speaker Verification systems are used as a form of biometric identification of the speaker. Over the past few years, there has been many attempts to spoof the ASV system by various attacks like Impersonation attacks, Replay Speech Synthesis, Voice Conversion. Hence a countermeasure system is needed to identify such attacks. The Countermeasure System will complement the ASV system in its identification process. The goal of the project is to develop a Countermeasure (CM) system to complement the ASV system to verify the authenticity (original/fake) of a given audio sample.
 
 * Objective  <br />
-The Automatic Speaker Verification (ASV) system ideally aims to verify the identity and authenticity of a target user given an audio sample. However, these ASV systems are vulnerable to spoofing attacks of the following kind:
-  - Impersonation attacks 
-  - Replay 
-  - Speech Synthesis 
-  - Voice Conversion 
+  -The Automatic Speaker Verification (ASV) system ideally aims to verify the identity and authenticity of a target user given an audio sample. However, these ASV systems are vulnerable to spoofing attacks of the following kind:
+    - Impersonation attacks 
+    - Replay 
+    - Speech Synthesis 
+    - Voice Conversion 
  
-Physical Access Attacks: Replay attacks where in the attacker captures the voice of the target user using a recording device and plays the recording to the ASV system)  <br />
+  -Physical Access Attacks: Replay attacks where in the attacker captures the voice of the target user using a recording device and plays the recording to the ASV system)  <br />
 
-Voice Conversion/Speech Synthesis attacks : Attacks where in an attacker utilizes TTS (text to speech) modules to generate speech to mimic the target user or use voice conversion techniques to convert the attacker’s voice to the target user’s voice). <br />
+  -Voice Conversion/Speech Synthesis attacks : Attacks where in an attacker utilizes TTS (text to speech) modules to generate speech to mimic the target user or use voice conversion techniques to convert the attacker’s voice to the target user’s voice). <br />
 
-Our aim to develop an countermeasure system which helps us tackle the Speech Synthesis/Voice Conversion attacks commonly referred to as Logical Access attacks. We will explore various feature extraction techniques such as MFCC, CQCC, Mel Spectrum and couple it with both DNN and Non Neural Network architectures to understand the performance of the resulting models.
+  -Our aim to develop an countermeasure system which helps us tackle the Speech Synthesis/Voice Conversion attacks commonly referred to as Logical Access attacks. We will explore various feature extraction techniques such as MFCC, CQCC, Mel Spectrum and couple it with both DNN and Non Neural Network architectures to understand the performance of the resulting models.
 <br />
 
 * State of the Art & Its Limitations:  <br />
@@ -71,7 +71,7 @@ What are metrics by which you would check for success?
 
 # 2. Related Work
 
-![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
+![This is an image](https://github.com/siddle00/ece209as_project/blob/main/Images/LR.png)
 
 
 # 3. Technical Approach
@@ -80,12 +80,58 @@ What are metrics by which you would check for success?
 - **Feature Extraction** 
   - MFCC (Mel Frequency Cepstral Coefficients) - Available @ Librosa python.
   - CQCC (Constant Q Cepstral Coefficients) - Implemented in python based on the block diagram below:
-  
 
+![This is CQCC ](https://github.com/siddle00/ece209as_project/blob/main/Images/CQCC.png)
+
+- **Classifier**
+  - GMM: 3 GMMs of 144, 256 & 512 mixture components modules with expectation-maximization (EM) algorithm with random initialisation were trained. 
+        - Score for a given test occurrence is computed as the log-likelihood ratio as following :
+      ![This is CQCC ](https://github.com/siddle00/ece209as_project/blob/main/Images/GMM.png)
+         - where X: Test utterance feature vectors, L: Likelihood function, Θn: GMMs for bonafide speech, Θs: GMM for spoofed speech.
+  - SVM: 2 SVMs with mean-variance normalisation performed on the extracted features applied on a linear/RBF kernel and the default parameters of the Scikit-Learn library.
+
+
+- **Dataset and Protocols**
+  - Publicly available ASVspoof 2019 LA [3] - Based on the VLTK corpus, a multi-speaker (46 male, 61 female) speech database. 
+        - Training set: 25380 with 2580 bonafide, 22800 spoofed utterances 
+        - Development set: 24987 with 2548 bonafide, 22296 spoofed utterances.
+        - Testing set: 71934 with 7355 bonafide, 63882 spoofed utterances.
+
+  - Spoofed data is generated by using 17 TTS and VC algorithms.
+        - 6 known spoofing systems with 2 VC and 4 TTS.
+        - 11 unknown spoofing systems with unknown division.
+
+
+- **Platform**
+  - Models were trained on Google Collab Pro on K80 and T4 GPUs with 32 GB RAM.
+  - Few of the pre-processing blocks were run on local machine.
 
 
 # 4. Evaluation and Results
 
+**-Evaluation Metric**
+
+  - Equal Error Rate (EER): Decision threshold where the false acceptance and the false rejection rates are equal.
+  - Tandem Detection Cost Function (t-DCF): Takes into account both the ASV system error and CM system error into consideration.
+      ![This is tdcf ](https://github.com/siddle00/ece209as_project/blob/main/Images/tdcf.png)
+      
+      - Casv miss - Cost of ASV system rejecting a target trial.
+      - Casv fa - Cost of ASV system accepting a non-target trial.
+      - Ccm miss - Cost of CM system rejecting a bonafide trial. 
+      - Ccm fa - Cost of ASV system accepting a spoof trial.
+      - π - Priori probabilities, P• - Error rates
+
+
+**-Results**
+
+- **Development Set Results**
+
+  ![This is dev ](https://github.com/siddle00/ece209as_project/blob/main/Images/dev.png)
+  
+  
+- **Evaluation Set Results** 
+
+  ![This is eval ](https://github.com/siddle00/ece209as_project/blob/main/Images/eval.png)
 
 # 5. Discussion and Conclusions
 
