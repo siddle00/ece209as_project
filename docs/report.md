@@ -56,7 +56,8 @@ Architecture Details: - Fusion Light CNN (LCNN) which operates upon LFCC feature
   -  Developing a model that can match the performance of fusion models. Fusion models are usally a combination on multiple sub systems and hence they are computationally expensive. Hence the light weight model must match the performance of the fusion models would be a challenge <br />
 
 * Requirements for Success: What skills and resources are necessary to perform the project?     <br />
-  -Based on the work done thus far, we understand that various filtering and pre-processing techniques such as MQCC, Mel Spectrum and CQCCs are required as these domain transformation techniques are widely used to convert the data from its acoustic waveform to its fourier domain. Hence speech processing/filtering domain knowledge is needed. <br />
+  -Based on the work done thus far, we understand that various filtering and pre-processing techniques such as MQCC, Mel Spectrum and CQCCs are required as these domain transformation techniques are widely used to convert the data from its acoustic waveform to its fourier domain. Hence speech processing/filtering domain knowledge is needed.
+  
   - The second leg of the architecture involves the use of Deep Learning models such as CNNs, RNNs along with traditional statistical/machine learning models such as the GMMs. Hence Statistical, Machine Learning and Deep Learning domain knowledge will be reuqired. 
   - Apart from that, models will be trained using Google Collab Pro GPUs and that should be the computational resources required.  <br />
 
@@ -70,6 +71,7 @@ What are metrics by which you would check for success?
 
 # 2. Related Work
 
+![This is an image](https://myoctocat.com/assets/images/base-octocat.svg)
 
 
 # 3. Technical Approach
@@ -84,7 +86,16 @@ What are metrics by which you would check for success?
 
 # 4. Evaluation and Results
 
+
 # 5. Discussion and Conclusions
+
+  -**What worked?**: Adopting the one class learning approach helped in generalising the model for unknown spoof attacks.
+  
+  -**What did not work?**: Although single systems did give comparable results to state of the art fusion models, better performance was expected. Probably a feature fusion could have aided in better results.
+  
+  -**What could have been done differently?**: Using deep models to extract features rather than using MFCC, CQCC. 
+  
+  -**Future directions**: Exploring performances on individual spoof attacks and propose maybe an ensemble architecture to handle different spoofing attacks.
 
 # 6. References
 [1] Kanervisto, Anssi & Hautamäki, Ville & Kinnunen, Tomi & Yamagishi, Junichi. (2022). Optimizing Tandem Speaker Verification and Anti-Spoofing Systems.
