@@ -19,9 +19,16 @@ This section should cover the following items:
 We observe a surge in the count of smart devices that uses voice control as its interface to users over the past decade. And since voice control is used in numerous senstive applications such as Banking, Healthcare and Smart Homes, Automatic Speaker Verification systems are used as a form of biometric identification of the speaker. Over the past few years, there has been many attempts to spoof the ASV system by various attacks like Impersonation attacks, Replay Speech Synthesis, Voice Conversion. Hence a countermeasure system is needed to identify such attacks. The Countermeasure System will complement the ASV system in its identification process. The goal of the project is to develop a Countermeasure (CM) system to complement the ASV system to verify the authenticity (original/fake) of a given audio sample.
 
 * Objective  <br />
-Given an Automatic Speaker Verification (ASV) system whose role is verify if the input speech sample belongs to the target user or not, this system is however vulenerable to attacks such as the following nature:
+The Automatic Speaker Verification (ASV) system ideally aims to verify the identity and authenticity of a target user given an audio sample. However, these ASV systems are vulnerable to spoofing attacks of the following kind:
+  - Impersonation attacks 
+  - Replay 
+  - Speech Synthesis 
+  - Voice Conversion 
+ 
 Physical Access Attacks: Replay attacks where in the attacker captures the voice of the target user using a recording device and plays the recording to the ASV system)  <br />
+
 Voice Conversion/Speech Synthesis attacks : Attacks where in an attacker utilizes TTS (text to speech) modules to generate speech to mimic the target user or use voice conversion techniques to convert the attacker’s voice to the target user’s voice). <br />
+
 Our aim to develop an countermeasure system which helps us tackle the Speech Synthesis/Voice Conversion attacks commonly referred to as Logical Access attacks. We will explore various feature extraction techniques such as MFCC, CQCC, Mel Spectrum and couple it with both DNN and Non Neural Network architectures to understand the performance of the resulting models.
 <br />
 
@@ -29,33 +36,51 @@ Our aim to develop an countermeasure system which helps us tackle the Speech Syn
 Architecture Details: - Fusion Light CNN (LCNN) which operates upon LFCC features (feature extraction technique to covert the raw acoustic waveform into its fourier domain) employing angular-margin-based softmax loss, batch normalization and a normal Kaiming initialization. <br />
 
 * Limitations:          <br />
-For the physical access attacks, it has been found that the system does not handle real world conditions charecterized by nuisance variations such as Additive noise.           <br />
-Does not model channel variability. <br />
+  - For the physical access attacks, it has been found that the system does not handle real world conditions charecterized by nuisance variations such as Additive noise.           <br />
+  - Does not model channel variability. <br />
+  - The system cannot defend against unknown spoofing attacks a.k.a generalization ability 
+  - How to match single system performances to fusion model (state of the art) which are computationally expensive ?
 
 
 * Novelty & Rationale:   <br />
-Our intention is to develop an architecture combining CNN model with sequencing models. Since we are dealing with temporal data, we believe sequence models such as RNNs, LSTMs and GRUs can be utilized to capture the temporal information present in the data and when coupled with CNNs which are known to extract both spatial and temporal information, the combination of both could yield us better results.            <br /> 
+  - How can the system defend against unknown spoofing attacks a.k.a generalization ability ?
+        - Intuition: One class classification approach with modified loss function to shrink the embedding space of the target class.
+  - How to match single system performances to fusion model which are computationally expensive ?
+        - Intuition: Using Generative models or Auto encoder models as an alternate to Deep fused models <br /> 
 
 * Potential Impact:     <br />
-On a general front, Counter Measure systems can be employed in tandem to ASV systems, thereby increasing the reliability of the system. On a technical front, the above architecture can handle the Logical Access and Physical Access attacks.         <br />
+  - On a general front, Counter Measure systems can be employed in tandem to ASV systems, thereby increasing the reliability of the system. On a technical front, the above architecture can handle the Logical Access and Physical Access attacks.
+  - Our proposed model relies on a combination of feature extraction and a traditional ML classifer and hence the model is lightweight. Hence it could be potentially emplpoyed in every day wireless devices without any demand for higher computational power or edge computation.       <br />
 
-* Challenges: What are the challenges and risks?    <br />
+* Challenges: What are the challenges and risks?   
+  -  Developing a model that can match the performance of fusion models. Fusion models are usally a combination on multiple sub systems and hence they are computationally expensive. Hence the light weight model must match the performance of the fusion models would be a challenge <br />
 
 * Requirements for Success: What skills and resources are necessary to perform the project?     <br />
-Based on the work done thus far, we understand that various filtering and pre-processing techniques such as MQCC, Mel Spectrum and CQCCs are required as these domain transformation techniques are widely used to convert the data from its acoustic waveform to its fourier domain. Hence speech processing/filtering domain knowledge is needed. <br />
-The second leg of the architecture involves the use of Deep Learning models such as CNNs, RNNs along with traditional statistical/machine learning models such as the GMMs. Hence Statistical, Machine Learning and Deep Learning domain knowledge will be reuqired.    <br />
+  -Based on the work done thus far, we understand that various filtering and pre-processing techniques such as MQCC, Mel Spectrum and CQCCs are required as these domain transformation techniques are widely used to convert the data from its acoustic waveform to its fourier domain. Hence speech processing/filtering domain knowledge is needed. <br />
+  - The second leg of the architecture involves the use of Deep Learning models such as CNNs, RNNs along with traditional statistical/machine learning models such as the GMMs. Hence Statistical, Machine Learning and Deep Learning domain knowledge will be reuqired. 
+  - Apart from that, models will be trained using Google Collab Pro GPUs and that should be the computational resources required.  <br />
 
 * Metrics of Success: <br />
 What are metrics by which you would check for success?
-As the problem is defined by the ASV spoof competion organizers (https://www.asvspoof.org/), the metrics defined are as follows:    <br />
-t-DCF [1] : the tandem detection cost function is the new primary metric in the ASVSpoof 2019 challenge. It was proposed as a reliable scoring metric to evaluate the combined performance of ASV and CMs.      <br />
-EER : the Equal Error Rate is used as a secondary metric. EER is determined by the point at which the miss (false negative) rate and false alarm (false positive) rate are equal to each other.                 <br />
+  -As the problem is defined by the ASV spoof competion organizers (https://www.asvspoof.org/), the metrics defined are as follows: 
+    - t-DCF [1] : the tandem detection cost function is the new primary metric in the ASVSpoof 2019 challenge. It was proposed as a reliable scoring metric to evaluate the combined performance of ASV and CMs.      <br />
+    -EER : the Equal Error Rate is used as a secondary metric. EER is determined by the point at which the miss (false negative) rate and false alarm (false positive) rate are equal to each other.                 <br />
 
 
 
 # 2. Related Work
 
+
+
 # 3. Technical Approach
+
+
+- **Feature Extraction** 
+  - MFCC (Mel Frequency Cepstral Coefficients) - Available @ Librosa python.
+  - CQCC (Constant Q Cepstral Coefficients) - Implemented in python based on the block diagram below:
+  
+
+
 
 # 4. Evaluation and Results
 
