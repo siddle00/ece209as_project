@@ -12,6 +12,6 @@ Using Deep Learning models for Audio spoofing detection. The problem statement i
 # Required Submissions
 
 * [Proposal](proposal)
-* [Midterm Checkpoint Presentation Slides](http://)
-* [Final Presentation Slides](http://)
+* [Midterm Checkpoint Presentation Slides](https://github.com/siddle00/ece209as_project/blob/main/docs/midterm%20presentation.pdf)
+* [Final Presentation Slides](https://github.com/siddle00/ece209as_project/blob/main/docs/Final%20Presentation.pdf)
 * [Final Report](report)
